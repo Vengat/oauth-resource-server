@@ -24,6 +24,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+import com.vengat.tuts.oauthresourceserver.domain.AdditionalClaimsAccessTokenConverter;
+
 /**
  * Because the resource server now takes the public key from the /oauth/token_key endpoint of the authorization server, 
  * you don’t need to configure it in the resource server configuration class. The configuration class of the resource server can remain empty, the code inside the ResourceServerConfigAsymmetricKeys config class can be safely removed:
@@ -49,7 +51,8 @@ public class ResourceServerConfigAsymmetricKeys extends WebSecurityConfigurerAda
 	}
 	
 	public JwtAccessTokenConverter jwtAccessTokenConverter() {
-		var converter = new JwtAccessTokenConverter();
+		//var converter = new JwtAccessTokenConverter();
+		var converter = new AdditionalClaimsAccessTokenConverter();
 		converter.setVerifierKey(publicKey);
 		return converter;
 	}
