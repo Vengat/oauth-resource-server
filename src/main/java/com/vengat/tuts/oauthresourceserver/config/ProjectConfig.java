@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import com.vengat.tuts.oauthresourceserver.domain.DocumentPermissionEvaluator;
@@ -21,6 +22,11 @@ public class ProjectConfig extends GlobalMethodSecurityConfiguration{
 	
 	@Autowired
 	private DocumentPermissionEvaluator documentPermissionEvaluator;
+	
+	@Bean
+	public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
+		return new SecurityEvaluationContextExtension();
+	}
 	
 	@Override
 	protected MethodSecurityExpressionHandler createExpressionHandler() {
